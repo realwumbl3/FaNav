@@ -22,7 +22,7 @@ document.body.addEventListener("keyup", _ => {
             clickOneOf(findButtons(), "Back", "Prev", "Prev. 24", "Prev. 48", "Prev. 72");
             break;
         case "KeyK":
-            clickOneOf(findButtons(), "Next", "Next 24", "Next 48", "Next 72"); 
+            clickOneOf(findButtons(), "Next", "Next 24", "Next 48", "Next 72");
             break;
         case "KeyD":
         case "KeyN":
@@ -36,8 +36,11 @@ document.body.addEventListener("keyup", _ => {
 })
 
 const gallery = document.querySelector(".gallery-section")
+let runningTimeout = null
 for (const img of document.querySelectorAll(".gallery-section img")) img.addEventListener("load", () => {
-    setTimeout(() => {
+    runningTimeout && clearTimeout(runningTimeout)
+    runningTimeout = setTimeout(() => {
+        console.log("reflow")
         gallery.replaceWith(gallery)
     }, 100)
 }, { once: true })
