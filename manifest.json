@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "FaNav. by wumbl3.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Enhancement suit for Furaffinity.",
   "content_scripts": [
     {

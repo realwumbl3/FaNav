@@ -79,6 +79,7 @@ function getFigureMeta(figure) {
 import { USER_NOTES } from "./mydata.js";
 
 /*
+rename mydata_template.js to mydata.js and fill it with your data, example:
 export const USER_NOTES = {
 	"user-name": {	
 		excluded: true,
