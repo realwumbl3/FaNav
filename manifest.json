@@ -21,7 +21,8 @@
         "<all_urls>"
       ],
       "resources": [
-        "src/*"
+        "src/*",
+        "mydata.json"
       ]
     }
   ],
