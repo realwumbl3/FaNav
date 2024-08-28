@@ -3,15 +3,16 @@ import { html, css } from "./zyX-es6.js";
 const BTTN_CLASS = ".button.standard";
 
 function findButtons() {
-	return Object.fromEntries(
-		[...document.querySelectorAll(BTTN_CLASS)].map((button) => [button.innerText, button])
-	);
+	return [...document.querySelectorAll(BTTN_CLASS)].map((button) => [button.innerText, button]);
 }
 
-function clickOneOf(buttons, ...buttonnames) {
-	for (const buttonname of buttonnames) {
-		const button = buttons[buttonname];
-		if (button) {
+function clickOneOf(...buttonnames) {
+	console.log("click one of", buttonnames);
+	const buttons = findButtons();
+	const regexes = buttonnames.map(name => new RegExp(name, "i"));
+	console.log("clickOneOf", regexes, buttons);
+	for (const [buttontext, button] of buttons) {
+		if (regexes.some(regex => regex.test(buttontext))) {
 			button.click();
 			return true;
 		}
@@ -19,29 +20,30 @@ function clickOneOf(buttons, ...buttonnames) {
 	return false;
 }
 
-document.body.addEventListener("keyup", (_) => {
+document.body.addEventListener("keyup", (event) => {
 	if (
 		document.activeElement.tagName === "INPUT" ||
 		document.activeElement.tagName === "TEXTAREA"
 	)
 		return;
-	switch (_.code) {
+	switch (event.code) {
 		case "KeyJ":
-			clickOneOf(findButtons(), "Back", "Prev", "Prev. 24", "Prev. 48", "Prev. 72");
+			clickOneOf(`Back`, `Prev`);
 			break;
 		case "KeyK":
-			clickOneOf(findButtons(), "Next", "Next 24", "Next 48", "Next 72");
+			clickOneOf(`Next`);
 			break;
 		case "KeyD":
 		case "KeyN":
-			clickOneOf(findButtons(), "-Fav");
+			clickOneOf(`-\\s*Fav`); // Example: for matching "- Fav"
 			break;
 		case "KeyF":
 		case "KeyM":
-			clickOneOf(findButtons(), "+Fav");
+			clickOneOf(`\\+\\s*Fav`); // Example: for matching "+ Fav"
 			break;
 	}
 });
+
 
 const gallery = document.querySelector(".gallery-section");
 function reflowGallery() {
