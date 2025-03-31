@@ -7,10 +7,8 @@ function findButtons() {
 }
 
 function clickOneOf(...buttonnames) {
-	console.log("click one of", buttonnames);
 	const buttons = findButtons();
 	const regexes = buttonnames.map(name => new RegExp(name, "i"));
-	console.log("clickOneOf", regexes, buttons);
 	for (const [buttontext, button] of buttons) {
 		if (regexes.some(regex => regex.test(buttontext))) {
 			button.click();
@@ -49,7 +47,6 @@ let gallery = document.querySelector("#standardpage");
 if (!gallery) gallery = document.querySelector("#browse-search")
 
 function reflowGallery() {
-	console.log("reflow");
 	gallery.replaceWith(gallery);
 }
 
