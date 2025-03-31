@@ -45,28 +45,26 @@ document.body.addEventListener("keyup", (event) => {
 });
 
 
-const gallery = document.querySelector(".gallery-section");
+let gallery = document.querySelector("#standardpage");
+if (!gallery) gallery = document.querySelector("#browse-search")
+
 function reflowGallery() {
+	console.log("reflow");
 	gallery.replaceWith(gallery);
 }
+
 let runningTimeout = null;
-for (const img of document.querySelectorAll(".gallery-section img"))
+for (const img of gallery.querySelectorAll("img"))
 	img.addEventListener(
 		"load",
 		() => {
 			runningTimeout && clearTimeout(runningTimeout);
 			runningTimeout = setTimeout(() => {
-				console.log("reflow");
 				reflowGallery();
 			}, 100);
 		},
 		{ once: true }
 	);
-
-let reflows = 5;
-setInterval(() => {
-	if (reflows-- > 0) reflowGallery();
-}, 500);
 
 function getFigureMeta(figure) {
 	const figcaption = figure.querySelector("figcaption");
