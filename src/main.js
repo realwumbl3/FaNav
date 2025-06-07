@@ -26,18 +26,18 @@ document.body.addEventListener("keyup", (event) => {
 		return;
 	switch (event.code) {
 		case "KeyJ":
-			clickOneOf(`Back`, `Prev`);
+			clickOneOf("Back", "Prev", "Newer")
 			break;
 		case "KeyK":
-			clickOneOf(`Next`);
+			clickOneOf("Next", "Older");
 			break;
 		case "KeyD":
 		case "KeyN":
-			clickOneOf(`-\\s*Fav`); // Example: for matching "- Fav"
+			clickOneOf("-\\s*Fav"); // Example: for matching "- Fav"
 			break;
 		case "KeyF":
 		case "KeyM":
-			clickOneOf(`\\+\\s*Fav`); // Example: for matching "+ Fav"
+			clickOneOf("\\+\\s*Fav"); // Example: for matching "+ Fav"
 			break;
 	}
 });
